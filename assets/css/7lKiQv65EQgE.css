@@ -1,0 +1,72 @@
+@font-face {
+	font-family: phantomFont;
+	src: url(../fonts/6ct23iu4O64l.woff2) format('woff2');
+	font-display: fallback;
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: phantomFont;
+	src: url(../fonts/C4rj6yp19ggA.woff2) format('woff2');
+	font-display: fallback;
+	font-weight: 400;
+	font-style: italic;
+}
+@font-face {
+	font-family: phantomFont;
+	src: url(../fonts/GNJkDqwgD5bb.woff2) format('woff2');
+	font-display: fallback;
+	font-weight: 350;
+	font-style: normal;
+}
+@font-face {
+	font-family: phantomFont;
+	src: url(../fonts/te5Jpm2D13uA.woff2) format('woff2');
+	font-display: fallback;
+	font-weight: 350;
+	font-style: italic;
+}
+@font-face {
+	font-family: phantomFont;
+	src: url(../fonts/1HIoV29FdckA.woff2) format('woff2');
+	font-display: fallback;
+	font-weight: 500;
+	font-style: normal;
+}
+@font-face {
+	font-family: phantomFont;
+	src: url(../fonts/CsEHHzUUGJ9C.woff2) format('woff2');
+	font-display: fallback;
+	font-weight: 500;
+	font-style: italic;
+}
+@font-face {
+	font-family: phantomFont;
+	src: url(../fonts/ET3pUYfdV8P1.woff2) format('woff2');
+	font-display: fallback;
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: phantomFont;
+	src: url(../fonts/b97BFwbfi3oU.woff2) format('woff2');
+	font-display: fallback;
+	font-weight: 700;
+	font-style: italic;
+}
+@font-face {
+	font-family: phantomFont Fallback;
+	src: local('Arial');
+	ascent-override: 86.48%;
+	descent-override: 26.84%;
+	line-gap-override: 9.94%;
+	size-adjust: 100.6%;
+}
+.__className_9d5ea3 {
+	font-family: phantomFont, phantomFont Fallback;
+}
+
+input.error {
+	border-color: #e54d2e !important;
+	box-shadow: 0 0 0 2px rgba(229, 77, 46, 0.2) !important;
+}
