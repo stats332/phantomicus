@@ -8,6 +8,36 @@ iframe {
 }
 
 
+.sites-layout-hbox,
+.sites-canvas-main,
+.eggGJb,
+.DShyMc-AaTFfe,
+.pwG8Gc {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Убираем боковые отступы */
+.sites-layout-hbox .sites-layout-tile {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Контейнер страницы */
+.sites-page-toolbar,
+.sites-canvas-wrapper {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+/* Если есть навигация */
+.sites-layout-hbox .sites-layout-sidebar {
+    display: none !important;
+}
+
+
 #h.3e0be8f6c9e6878a_3 yaqOZd {
 
 padding: 0px !importnat;
